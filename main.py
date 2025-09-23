@@ -1,26 +1,42 @@
-import pygame, sys
+import pygame, sys, random
 from grid import Grid
+from robot import Robot
+from target import Target
+from game import Game
+
+def draw():
+    target.draw()
+    robot.draw()
+
 
 pygame.init()
 
-screen = pygame.display.set_mode((600, 600))
-pygame.display.set_caption("Warehouse Robot Simulation")
-
 clock = pygame.time.Clock()
 
+pygame.display.set_caption("Warehouse Robot Simulation")
+
+SCREEN_UPDATE = pygame.USEREVENT
+pygame.time.set_timer(SCREEN_UPDATE, 100)
+
+
+
+main_game = Game()
 game_grid = Grid()
-game_grid.print_grid()
+target = Target()
+robot = Robot()
 
-running = True
-while running:
-    pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(0, 0, 60, 60))
-
+while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            pygame.quit()
+            sys.exit()
+
+    main_game.screen.fill((184,189,181))
+    draw()
+
 
     pygame.display.update()
     clock.tick(60)
 
-pygame.quit()
-sys.exit()
+
+
