@@ -12,12 +12,13 @@ class Robot:
         self.x = random.randint(0, Game.cell_number - 1)
         self.y = random.randint(0, Game.cell_number - 1)
         self.position = Vector2(self.x, self.y)
-        while self.position == target.position:
-            self.x = random.randint(0, Game.cell_number - 1)
-            self.y = random.randint(0, Game.cell_number - 1)
-            self.position = Vector2(self.x, self.y)
+
+    def randomize(self):
+        self.x = random.randint(0, Game.cell_number - 1)
+        self.y = random.randint(0, Game.cell_number - 1)
+        self.position = Vector2(self.x, self.y)
 
     def draw(self):
         robot_rect = pygame.Rect(self.position.x * Game.cell_size, self.position.y * Game.cell_size, Game.cell_size,
                                   Game.cell_size)
-        pygame.draw.rect(Game.screen, (223, 156, 220), robot_rect)
+        pygame.draw.rect(Game.screen, (30,144,255), robot_rect)

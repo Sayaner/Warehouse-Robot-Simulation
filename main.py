@@ -7,6 +7,7 @@ from game import Game
 def draw():
     target.draw()
     robot.draw()
+    main_game.draw_walls(50)
 
 
 pygame.init()
@@ -22,8 +23,14 @@ pygame.time.set_timer(SCREEN_UPDATE, 100)
 
 main_game = Game()
 game_grid = Grid()
-target = Target()
 robot = Robot()
+target = Target()
+
+# robot, target and walls all need to have different position
+while target.position in main_game.walls:
+    target.randomize()
+while robot.position == target.position or robot.position in main_game.walls:
+    robot.randomize()
 
 while True:
     for event in pygame.event.get():
